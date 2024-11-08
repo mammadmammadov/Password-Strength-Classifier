@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Password Strength Checker</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            background: linear-gradient(to right, #004d00, #003700); /* Dark green gradient for a security theme */
+            color: #fff;
+            padding-top: 50px;
+        }
+
+        .container {
+            max-width: 500px;
+            background: rgba(0, 128, 0, 0.6); /* Greenish background for security feel */
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 15px rgba(0, 255, 0, 0.4); /* Green glow for the security theme */
+        }
+
+        h1 {
+            color: #fff;
+            font-size: 2rem;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .form-control {
+            background-color: rgba(255, 255, 255, 0.8); /* Slight transparency for input */
+            border: none;
+            color: #000;
+        }
+
+        .btn-primary {
+            background-color: #28a745; /* Strong green button for submission */
+            border-color: #28a745;
+            border-radius: 0.25rem;
+        }
+
+        .input-group-text {
+            cursor: pointer; /* Change cursor to pointer on hover */
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1 class="text-center mb-4">Password Strength Checker</h1>
+    <form id="passwordForm" action="/predict" method="post">
+        <div class="form-group">
+            <label for="password">Password:</label>
+            <div class="input-group">
+                <input type="password" id="password" name="password" class="form-control" placeholder="Enter your password" required>
+                <div class="input-group-append">
+                    <span class="input-group-text" id="togglePassword">
+                        <i class="fas fa-eye" id="eyeIcon"></i>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Check Strength</button>
+    </form>
+    <div id="feedback" class="mt-3"></div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script>
+    const togglePassword = document.querySelector('#togglePassword');
+    const passwordInput = document.querySelector('#password');
+    const eyeIcon = document.querySelector('#eyeIcon');
+
+    togglePassword.addEventListener('click', function () {
+        // Toggle the type attribute
+        const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+        passwordInput.setAttribute('type', type);
+        // Toggle the eye slash icon
+        eyeIcon.classList.toggle('fa-eye-slash');
+    });
+</script>
+</body>
+</html>

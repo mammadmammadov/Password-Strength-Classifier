@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Password Strength Result</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(to right, #004d00, #003700); /* Dark green gradient for a security theme */
+            color: #fff;
+            padding-top: 50px;
+        }
+
+        .container {
+            max-width: 500px;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 15px rgba(0, 255, 0, 0.4); /* Green glow for the security theme */
+            transition: background-color 0.3s; /* Smooth transition for background color */
+        }
+
+        .weak {
+            background: rgba(255, 0, 0, 0.6); /* Red for weak passwords */
+        }
+
+        .medium {
+            background: rgba(255, 255, 0, 0.6); /* Yellow for medium passwords */
+        }
+
+        .strong {
+            background: rgba(0, 128, 0, 0.6); /* Green for strong passwords */
+        }
+
+        h1 {
+            color: #fff;
+            font-size: 2rem;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .form-control {
+            background-color: rgba(255, 255, 255, 0.8); /* Slight transparency for input */
+            border: none;
+            color: #000;
+        }
+
+        .btn-primary {
+            background-color: #28a745; /* Strong green button for submission */
+            border-color: #28a745;
+            border-radius: 0.25rem;
+        }
+
+        .shap-container {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .shap-container img {
+            max-width: 100%;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 255, 0, 0.5); /* Green glow for SHAP image */
+        }
+    </style>
+</head>
+<body>
+
+<div class="container {{ prediction_class }}" id="resultContainer">
+    <h1 class="text-center mb-4">Password Strength</h1>
+
+    <div class="alert text-center" role="alert">
+        <strong>Password Strength:</strong> {{ prediction.capitalize() }}
+    </div>
+
+    <!-- Show SHAP Values Button -->
+    <form action="/show_shap" method="POST">
+        <button type="submit" class="btn btn-primary btn-block mt-4">Show SHAP Values</button>
+    </form>
+
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>
