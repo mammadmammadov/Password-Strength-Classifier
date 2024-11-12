@@ -5,10 +5,77 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SHAP Values</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+
+        body {
+            background: linear-gradient(135deg, #b5c1d2, #889bb7);
+            color: #33235c;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            max-width: 600px;
+            background: #f2f4f8;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+
+        h1 {
+            color: #33235c;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        h3 {
+            color: #4a4e69;
+            font-size: 1.8rem;
+            margin-top: 20px;
+        }
+
+        .shap-container {
+            padding: 15px;
+            margin: 20px 0;
+            text-align: center;
+            background-color: #eef1f5;
+            border-radius: 10px;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-primary {
+            background-color: #33235c;
+            border-color: #4a4e69;
+            color: #f2f4f8;
+            padding: 12px 0;
+            font-weight: bold;
+            font-size: 1.1rem;
+            border-radius: 8px;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background-color: #4a4e69;
+            border-color: #4a4e69;
+            color: #ffffff;
+        }
+    </style>
 </head>
 <body>
 
-<div class="container text-center" style="padding-top: 50px;">
+<div class="container text-center">
     <h1>SHAP Values Explanation</h1>
     <div class="shap-container">
         <h3>Feature Contribution (SHAP)</h3>
