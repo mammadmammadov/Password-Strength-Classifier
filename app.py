@@ -68,9 +68,7 @@ def predict():
         base_value_for_class = shap_values_for_instance.base_values[
             predicted_class_index]  # Base value for the predicted class
         feature_values = shap_values_for_instance.data  # Original feature values
-        # -------------------------------------------------------------------------------------
 
-        # -----------------------------------
         # Create the explanation for the predicted class
         explanation = shap.Explanation(
             values=shap_values_for_class,

@@ -4,55 +4,119 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Password Strength Checker</title>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jost:wght@500&display=swap">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
-            background:#b5c1d2; /* Dark green gradient for a security theme */
+            background: #b5c1d2;
             color: #33235c;
-            padding-top: 50px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: 'Jost', sans-serif;
+            overflow: hidden;
         }
 
         .container {
-            max-width: 500px;
-            background: #889bb7; /* Greenish background for security feel */
-            padding: 30px;
+            background: #889bb7;
+            padding: 40px;
             border-radius: 10px;
-            box-shadow: 0px 0px 15px #9882d0; /* Green glow for the security theme */
+            box-shadow: 0px 0px 15px #9882d0;
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+            z-index: 2;
         }
 
         h1 {
             color: #33235c;
-            font-size: 2rem;
+            font-size: 1.8rem;
             font-weight: bold;
-            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+            position: relative;
+            width: 100%;
         }
 
         .form-control {
-            background-color: rgba(255, 255, 255, 0.8); /* Slight transparency for input */
+            background-color: rgba(255, 255, 255, 0.9);
             border: none;
+            border-radius: 5px;
             color: #000;
+            padding: 10px;
+            font-size: 1rem;
+            width: 100%;
+            height: 40px;
+            box-sizing: border-box;
+            padding-right: 40px;
         }
 
         .btn-primary {
-            background-color:#33235c; /* Strong green button for submission */
-            border-color: #676798;
-            border-radius: 0.25rem;
+            background-color: #33235c;
+            border: none;
+            border-radius: 5px;
+            padding: 10px;
+            font-size: 1rem;
+            font-weight: bold;
+            color: white;
+            width: 100%;
+            cursor: pointer;
+            margin-top: 10px;
         }
 
         .input-group-text {
-            cursor: pointer; /* Change cursor to pointer on hover */
+            cursor: pointer;
+            color: #33235c;
+            background: transparent;
+            border: none;
+        }
+
+        .container-anime {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+    .plane {
+        position: absolute;
+        width: 300px;
+        height: 150px;
+        bottom: 0;
+        background: url('{{ url_for("static", filename="p.webp") }}') no-repeat center;
+        background-size: contain;
+    }
+        .ribbon {
+            position: absolute;
+            bottom: 10%;
+            left: calc(100px + 500px - 10px);
+            color: whitesmoke;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 41px;
+            text-align: right;
+            font-family: cursive;
         }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h1 class="text-center mb-4">Password Strength Checker</h1>
+    <h1>Password Strength Checker</h1>
     <form id="passwordForm" action="/predict" method="post">
         <div class="form-group">
-            <label for="password">Password:</label>
             <div class="input-group">
                 <input type="password" id="password" name="password" class="form-control" placeholder="Enter your password" required>
                 <div class="input-group-append">
@@ -62,9 +126,16 @@
                 </div>
             </div>
         </div>
-        <button type="submit" class="btn btn-primary btn-block">Check Strength</button>
+        <button type="submit" class="btn-primary">Check Strength</button>
     </form>
     <div id="feedback" class="mt-3"></div>
+</div>
+
+<div class="container-anime">
+    <div class="ribbon" id="ribbon">
+        <p id="teamName"></p>
+    </div>
+    <div class="plane" id="plane"></div>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
@@ -76,12 +147,38 @@
     const eyeIcon = document.querySelector('#eyeIcon');
 
     togglePassword.addEventListener('click', function () {
-        // Toggle the type attribute
         const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
         passwordInput.setAttribute('type', type);
-        // Toggle the eye slash icon
         eyeIcon.classList.toggle('fa-eye-slash');
     });
+
+    const plane = document.getElementById("plane");
+    const ribbon = document.getElementById("ribbon");
+    const teamName = document.getElementById("teamName");
+    const teamMembers = ['Created by', "Mammad", "Sevinj", "Murad"];
+    let memberIndex = 0;
+    let position = -250;
+
+    function changeName() {
+        teamName.innerText = teamMembers[memberIndex];
+        memberIndex = (memberIndex + 1) % teamMembers.length;
+    }
+
+    function animate() {
+        position += 2;
+        ribbon.style.left = position + "px";
+        plane.style.left = position + 120 + "px";
+
+        if (position > window.innerWidth) {
+            position = -300;
+        }
+
+        requestAnimationFrame(animate);
+    }
+
+    setInterval(changeName, 2000);
+    animate();
 </script>
+
 </body>
 </html>
