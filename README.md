@@ -1,1 +1,1 @@
-# Password-Strength-Classifier
+# Password Strength Classifier
